@@ -1,10 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Hero = () => {
+  const heroPath = "/images/hero-img.jpg";
+
   return (
     <Wrapper>
-      <HeroImage src="/images/hero-img.jpg" />
+      <picture>
+        <source
+          type="image/avif"
+          srcset={`
+            ${heroPath.replace(".jpg", ".avif")} 1x,
+            ${heroPath.replace(".jpg", "@2x.avif")} 2x,
+            ${heroPath.replace(".jpg", "@3x.avif")} 3x
+            `}
+        />
+        <source
+          type="image/jpg"
+          srcset={`
+            ${heroPath.replace(".jpg", ".jpg")} 1x,
+            ${heroPath.replace(".jpg", "@2x.jpg")} 2x,
+            ${heroPath.replace(".jpg", "@3x.jpg")} 3x
+            `}
+        />
+        <HeroImage alt="" src={heroPath} />
+      </picture>
+
       <Swoop src="/swoop.svg" />
     </Wrapper>
   );
@@ -25,6 +46,7 @@ const HeroImage = styled.img`
   width: 500px;
   height: 500px;
   max-height: 100%;
+  object-fit: cover;
 `;
 
 const Swoop = styled.img`
